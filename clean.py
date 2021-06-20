@@ -1,4 +1,4 @@
-# forked from Finetune's clean.py on 6.20.2021
+# forked from Finetuneanon's clean.py on 6.20.2021
 # recommended for gpt-neo tfrecords: clean.py -C -u -r -s -i input/ -o clean/
 # if doing a simple clean for dataset inside root folder run: python3 clean.py -u -r -c -w -t -i \. -o \output
 # windows cmd might throw codec errors, use powershell or wsl instead
@@ -56,6 +56,7 @@ Markdown.output_formats["plain"] = unmark_element
 __md = Markdown(output_format="plain")
 __md.stripTopLevelTags = False
 
+
 def unmark(text):
     return __md.convert(text)
 
@@ -78,7 +79,7 @@ for file in all_files:
     if args.shuffle:
         out = str(output / Path(f"clean-{file_id:05d}"))
         file_id += 1
-    with open(file, 'r', encoding='utf-8') as fh:s
+    with open(file, 'r', encoding='utf-8') as fh:
         text = fh.read()
     text = re.sub(r'( |\t)+', ' ', text) # unindent
     text = re.sub(r'(^|\n)( |\t)+', r'\1', text) # unindent
