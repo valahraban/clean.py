@@ -56,49 +56,8 @@ Markdown.output_formats["plain"] = unmark_element
 __md = Markdown(output_format="plain")
 __md.stripTopLevelTags = False
 
-
 def unmark(text):
     return __md.convert(text)
-
-def space_fix(s):
-    have_open = False
-    need_space = False
-    need_now = False
-    was_space = False
-    no_space = False
-    r = ""
-    for i in range(len(s)):
-        if s[i] == '"':
-            if have_open:
-                need_space = True
-                need_now = True
-                have_open = False
-                if was_space:
-                    r = r[:-1]
-            else:
-                if need_space:
-                    r += " "
-                have_open = True
-                no_space = True
-            r += s[i]
-            was_space = False
-            continue
-        if need_space and need_now:
-            if not s[i].isspace():
-                r += " "
-            need_space = False
-            need_now = False
-        if s[i].isspace():
-            if no_space:
-                continue
-            need_space = False
-            was_space = True
-        else:
-            need_space = True
-            was_space = False
-        no_space = False
-        r += s[i]
-    return r
 
 all_files = []
 
